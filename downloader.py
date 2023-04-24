@@ -33,7 +33,11 @@ class Downloader:
             f.write(r.content)
 
     def multi_download(self, tread=20):
-        pool = ThreadPool(tread)
-        pool.starmap(self.download, self.download_list.items())
-        pool.close()
-        pool.join()
+        try:
+            pool = ThreadPool(tread)
+            pool.starmap(self.download, self.download_list.items())
+            pool.close()
+            pool.join()
+        except:
+            print('Error in download')
+            exit(1)
